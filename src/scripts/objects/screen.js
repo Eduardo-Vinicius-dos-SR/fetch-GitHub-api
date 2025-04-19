@@ -7,6 +7,10 @@ const screen = {
 			<div class="data">
 				<h1>${user.name ?? "Não possui nome cadastrado"}</h1>
 				<p>${user.bio ?? "Não possui biografia cadastrada"}</p>
+				<div class="follow">
+					<p><strong>Seguidores:</strong> ${user.followers}</p>
+					<p><strong>Segue:</strong> ${user.following}</p>
+				</div>
 			</div>
 		</div>`;
 
@@ -21,6 +25,26 @@ const screen = {
             <h2>Repositórioes</h2>
             <ul>${repositoriesItens}</ul>
          </div>`;
+		}
+
+		let eventsItems = ``;
+		user.events.forEach((event) => {
+			if (event.type !== "PushEvent" && event.type !== "CreateEvent") return;
+
+			const commitPath = event.payload.commits;
+			if (event.type === "PushEvent" && commitPath && commitPath.length > 0) {
+				eventsItems += `<li><h3><strong>${event.repo.name}</strong> - ${commitPath[0].message}</h3></li>`;
+			} else {
+				eventsItems += `<li><h3><strong>${event.repo.name}</strong> - Sem mensagem de commit</h3></li>`;
+			}
+		});
+
+		if (eventsItems) {
+			this.userProfile.innerHTML += `
+    <div class="events">
+        <h2>Eventos</h2>
+        <ul class="events-list">${eventsItems}</ul>
+    </div>`;
 		}
 	},
 	renderNotFound() {
