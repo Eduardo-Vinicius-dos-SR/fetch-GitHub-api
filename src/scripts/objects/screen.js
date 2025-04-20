@@ -15,14 +15,27 @@ const screen = {
 		</div>`;
 
 		let repositoriesItens = ``;
-		user.repositories.forEach(
-			(repo) => (repositoriesItens += `<li><a href="${repo.html_url}" target="_blank">${repo.name}</a></li>`)
-		);
+		user.repositories.forEach((repo) => {
+			let repoLanguage = repo.language;
+			if (repoLanguage == null) {
+				repoLanguage = "Nenhuma";
+			}
+
+			repositoriesItens += `<li><a href="${repo.html_url}" target="_blank">
+				<h2>${repo.name}</h2>
+				<div class="repo-info">
+					<p>🍴 ${repo.forks_count}</p>
+					<p>⭐ ${repo.stargazers_count}</p>
+					<p>👀 ${repo.watchers_count}</p>
+					<p>👨‍💻 ${repoLanguage}</p>
+				</div>
+			</a></li>`;
+		});
 
 		if (user.repositories.length > 0) {
 			this.userProfile.innerHTML += `
          <div class="repositories section">
-            <h2>Repositórioes</h2>
+            <h2 class="repositories-title">Repositórios</h2>
             <ul>${repositoriesItens}</ul>
          </div>`;
 		}

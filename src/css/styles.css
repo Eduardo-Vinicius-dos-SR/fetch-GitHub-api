@@ -136,9 +136,10 @@ main {
 
 /* REPOSITORIES */
 
-.container .profile-data .repositories h2 {
+.container .profile-data .repositories .repositories-title {
 	margin-bottom: 30px;
 	text-align: center;
+	font-weight: 500;
 }
 
 .container .profile-data .repositories ul {
@@ -159,6 +160,32 @@ main {
 .container .profile-data .repositories ul li a:hover {
 	background-color: hotpink;
 	color: #fff;
+}
+
+.repositories ul li a h2 {
+	margin-bottom: 10px;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.repositories ul li a .repo-info {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 5px;
+}
+
+.repositories ul li a .repo-info p {
+	border-radius: 5px;
+	padding: 5px;
+	background-color: rgb(95, 38, 207);
+	color: #fff;
+	transition: 0.3s ease-in-out;
+}
+
+.repositories ul li a:hover .repo-info p {
+	background-color: rgba(95, 38, 207, 0.7);
 }
 
 /* EVENTS */
